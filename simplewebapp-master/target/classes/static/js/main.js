@@ -47,9 +47,9 @@ Vue.component('employee-form', {
         save: function() {
             var employee = { employeeId: this.employeeId, firstName: this.firstName , lastName: this.lastName, departmentId: this.departmentId, jobTitle: this.jobTitle, gender: this.gender, dateOfBirth: this.dateOfBirth};
             if (this.employeeId){
-              employeeApi.update({id: this.employeeId}, employee).then(result =>
-                  result.json().then(data => {
-                  var index = getIndex(this.employees, data.employeeId);
+                employeeApi.update({id: this.employeeId}, employee).then(result =>
+                result.json().then(data => {
+                var index = getIndex(this.employees, data.employeeId);
                 this.employees.splice(index, 1, data);
                 this.firstName = ''
                 this.lastName = ''
@@ -58,12 +58,12 @@ Vue.component('employee-form', {
                 this.gender = ''
                 this.employeeId = ''
                 this.dateOfBirth = ''
-                 })
+                })
               )
             } else {
                 employeeApi.save({}, employee).then(result =>
                 result.json().then(data => {
-                    this.employees.push(data);
+                this.employees.push(data);
                 this.firstName = ''
                 this.lastName = ''
                 this.departmentId = ''
@@ -110,7 +110,8 @@ Vue.component('employees-list', {
     data: function() {
         return {
             employee: null
-        }    },
+        }
+    },
     template: '<div style="position: relative; width: 1200px;">' +
                 '<employee-form :employees="employees" :employeeAttr="employee" />' +
                 '<employee-row v-for="employee in employees" :key="employee.id" :employee="employee" ' +
